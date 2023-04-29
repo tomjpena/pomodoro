@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const connectDB = require('./config/db')
+const { errorHandler } = require('./middleware/errorMiddleware')
 
 //Connect to DB
 connectDB()
@@ -17,6 +18,13 @@ app.use(express.urlencoded({extended: false}))
 
 // Cookie parser middleware
 app.use(cookieParser())
+
+// Route
+app.use('/api/users', require('./routes/userRoutes'))
+
+
+// Error handling middleware
+app.use(errorHandler)
 
 // Starting Server
 app.listen(PORT, () => {

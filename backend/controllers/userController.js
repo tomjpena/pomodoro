@@ -3,8 +3,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
 
-const User = require('../models/userModel.js')
-
 // @desc Registers user
 // @route Post /api/users
 // @access Public
@@ -32,21 +30,26 @@ const registerUser = asynHandler(async (req, res, next) => {
   const salt = await bcrypt.genSalt(10)
   const hashedPassword = await bcrypt.hash(password, salt)
 
-  // Create new user in db
-  const user = await User.create({
-    username,
-    password: hashedPassword,
-  })
-
-  // Generate JWT
-  const token = generateToken(user._id)
-
-  // Put token into a cookie and send response
-  res.cookie('jwt', token, { httpOnly: true, maxAge })
-  return res.status(201).json({
-    _id: user._id,
-    username: user.username,
-  })
+  try {
+    // Create new user in db
+    const user = await User.create({
+      username,
+      password: hashedPassword,
+    })
+  
+    // Generate JWT
+    const token = generateToken(user._id)
+  
+    // Put token into a cookie and send response
+    res.cookie('jwt', token, { httpOnly: true, maxAge: 86400000 })
+    return res.status(201).json({
+      _id: user._id,
+      username: user.username,
+    })
+  } catch (error) {
+    res.status(400)
+    throw new Error('Error: User not created')
+  }
  
 })
 
