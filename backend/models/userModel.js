@@ -12,6 +12,17 @@ const UserSchema = new mongoose.Schema({
     minlength: 6,
     required: true,
   },
+  projects: {
+    type: [String],
+  },
+  streak: {
+    type: Number,
+    default: 0,
+  },
+  lastSession: {
+    type: String,
+    default: ''
+  }
 },
 {
   timestamps: true

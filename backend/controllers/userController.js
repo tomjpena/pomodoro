@@ -1,12 +1,12 @@
-const asynHandler = require('express-async-handler')
+const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
 
 // @desc Registers user
-// @route Post /api/users
+// @route POST /api/users
 // @access Public
-const registerUser = asynHandler(async (req, res, next) => {
+const registerUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body
 
   // Check if password length is >= 6
@@ -54,10 +54,74 @@ const registerUser = asynHandler(async (req, res, next) => {
 })
 
 
+// @desc Logs user in
+// @route POST /api/users/login
+// @access Public
+const loginUser = asyncHandler(async (req, res) => {
+  const { username, password } = req.body
+  
+  // Pull user from db
+  const user = await User.findOne({ username })
+
+  // Check fields to see if they are filled
+  if (!username || !password) {
+    res.status(400)
+    throw new Error('Please enter all fields')
+  }
+  
+  // Check if password entered matches password in DB
+  const passwordMatch = await bcrypt.compare(password, user.password)
+
+  // Check to see if user exists and password match
+  if (user && passwordMatch) {
+    const token = generateToken(user._id)
+
+    res.cookie('jwt', token, { httpOnly: true, maxAge: 86400000 })
+    return res.status(201).json({
+      _id: user._id,
+      username: user.username,
+    })
+  } else {
+    res.status(401)
+    throw new Error('Incorrect username or password. Please try again')
+  }
+})
+
+// @todo Fix this function. Postman just hangs after sending request. Tried using .save() and .findOneAndUpdate(). Save will actually change the password.
+// @desc Update user info
+// @route POST /api/users/login
+// @access Public
+// const updatePassword = asyncHandler(async (req, res) => {
+//   const { username, password, newPassword } = req.body
+
+//   const user = await User.findOne({ username })
+
+//   if (!username || !password) {
+//     res.status(400)
+//     throw new Error('Please enter all fields')
+//   }
+
+//   const passwordMatch = await bcrypt.compare(password, user.password)
+
+//   if (user && passwordMatch) {
+//     const salt = await bcrypt.genSalt(10)
+//     const hashedPassword = await bcrypt.hash(newPassword, salt)
+//     await User.findOneAndUpdate({ username }, { password: hashedPassword})
+
+//     return res.status(200)
+//   } else {
+//     res.status(400)
+//     throw new Error('Something went wrong. Password not updated')
+//   }
+
+// })
+
+// Function to generate token used in register and login
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {expiresIn: '24h'})
 }
 
 module.exports = {
-  registerUser
+  registerUser,
+  loginUser,
 }
