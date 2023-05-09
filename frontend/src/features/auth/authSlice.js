@@ -56,13 +56,13 @@ export const authSlice = createSlice({
       .addCase(register.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(register.rejected, (state) => {
+      .addCase(register.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
         state.user = null
       })
-      .addCase(register.fulfilled, (state) => {
+      .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
         state.user = action.payload
@@ -70,13 +70,13 @@ export const authSlice = createSlice({
       .addCase(login.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(register.rejected, (state) => {
+      .addCase(login.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
         state.user = null
       })
-      .addCase(register.fulfilled, (state) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
         state.user = action.payload
