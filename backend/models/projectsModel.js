@@ -14,6 +14,10 @@ const ProjectsSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
+  },
+  pomodoros: {
+    type: Number,
+    default: 0
   }
 },
 {

@@ -1,4 +1,4 @@
-import {Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container} from '@mui/material'
+import {Avatar, Button, CssBaseline, TextField, Link, Box, Typography, Container} from '@mui/material'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { login, reset } from '../features/auth/authSlice';
@@ -10,13 +10,9 @@ const SignIn = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const {user, isLoading, isError, isSuccess, message} = useSelector(state => state.auth)
+  const {isError, isSuccess, message} = useSelector(state => state.auth)
 
   useEffect(() => {
-    if(isError) {
-      console.log(message);
-    }
-
     if(isSuccess) {
       navigate('/')
     }
@@ -25,9 +21,9 @@ const SignIn = () => {
 
   }, [isError, isSuccess, message, dispatch, navigate])
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
     
     const userData = {
       'username': data.get('username'),

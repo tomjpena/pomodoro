@@ -19,8 +19,10 @@ app.use(express.urlencoded({extended: false}))
 // Cookie parser middleware
 app.use(cookieParser())
 
-// Route
+// Routes
 app.use('/api/users', require('./routes/userRoutes'))
+
+app.use('/api/data', require('./routes/dataRoutes'))
 
 
 // Error handling middleware

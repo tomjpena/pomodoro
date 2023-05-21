@@ -10,7 +10,7 @@ const auth = asyncHandler(async (req, res, next) => {
   if (req.cookies) {
     try {
       //Splits the token in the cookie to remove the 'jwt='
-      token = req.cookies.split('=')[1]
+      token = req.cookies.jwt
       //Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
       req.userId = await User.findById(decoded.id).select('-password')
@@ -27,4 +27,4 @@ const auth = asyncHandler(async (req, res, next) => {
 
 })
 
-module.exports = auth
+module.exports = { auth }
