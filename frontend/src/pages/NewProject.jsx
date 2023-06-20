@@ -33,9 +33,10 @@ const NewProject = () => {
     }
   }
   return (
-    <Paper elevation={0} sx={{ p: 7, m: -1, height: '100vh' }}>
-       <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-        <Typography variant="h2" textAlign='center' sx={{ mb: 7 }}>
+    <Paper elevation={0} 
+      sx={{ px: { xs: 2, sm: 4, md: 7 }, py: 7, m: -1, height: '100vh' }}>
+       <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: {xs: '100%', md: '75%'}, mx: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <Typography variant="h2" textAlign='center' sx={{ mb: { xs: 3, sm: 5, md: 7 }, fontSize: { xs: "h5.fontSize", sm: "h3.fontSize", md: "h2.fontSize" } }}>
           Please enter all fields to add your new project
         </Typography>
 
@@ -47,6 +48,7 @@ const NewProject = () => {
           label="Project Name"
           name="projectName"
           autoFocus
+          sx={{width: {xs: '100%', md: '75%'}}}
         />
         <TextField
           margin="normal"
@@ -55,12 +57,13 @@ const NewProject = () => {
           name="description"
           label="Description"
           id="description"
+          sx={{width: {xs: '100%', md: '75%'}}}
         />
         <Button
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2, color:'white' }}
+          sx={{ mt: 3, mb: 2, color:'white', width: {xs: '100%', md: '75%'} }}
         >
           Add Project
         </Button>        

@@ -1,4 +1,4 @@
-import { Paper, Box, CircularProgress, Typography } from "@mui/material"
+import { Paper, Box, CircularProgress, Typography, useMediaQuery, useTheme } from "@mui/material"
 import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
@@ -12,6 +12,11 @@ const Timer = () => {
   const [countDownTime, setCountDownTime] = useState(25 * 60);  // Total time in seconds
   const { projects } = useSelector((state) => state.data)
   const audio = useRef(null)
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const circularProgressSize = isSmallScreen ? 200 : 400;
+  const typographyVariant = isSmallScreen ? "h4" : "h2"
 
   useEffect(() => {
     audio.current = new Audio(alarm)
@@ -63,9 +68,9 @@ const Timer = () => {
   const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
 
   return (
-    <Paper elevation={0} sx={{ p: 7, m: -1, height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-       <Box sx={{ position: 'relative', display: 'inline-flex',  }}>
-        <CircularProgress size={400} variant="determinate" value={(1 - countDownTime / (25 * 60)) * 100} />
+    <Paper elevation={0} sx={{ p: 2, m: -1, height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+        <CircularProgress size={circularProgressSize} variant="determinate" value={(1 - countDownTime / (25 * 60)) * 100} />
         <Box
           sx={{
             top: 0,
@@ -78,13 +83,20 @@ const Timer = () => {
             justifyContent: 'center',
           }}
         >
-          <Typography variant="h2" component="div" color="text.secondary">
+          <Typography variant={typographyVariant} component="div" color="text.secondary">
             {`${minutes}:${formattedSeconds}`}
           </Typography>
         </Box>
       </Box>  
       <Box>
-        <iframe src="https://open.spotify.com/embed/playlist/66ObUW8grgqgWyFemzkWqm?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
+        <iframe 
+          src="https://open.spotify.com/embed/playlist/66ObUW8grgqgWyFemzkWqm?utm_source=generator&theme=0" 
+          width="100%" 
+          height="150px" 
+          frameBorder="0" 
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" 
+          loading="lazy">
+        </iframe>
       </Box> 
     </Paper>
   )

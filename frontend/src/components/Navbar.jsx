@@ -10,6 +10,7 @@ const Navbar = () => {
   const dispatch = useDispatch()
 
   const { projects } = useSelector((state) => state.data)  
+  const { user } = useSelector((state) => state.auth)
 
   useEffect(() => {
     dispatch(getData())
@@ -80,7 +81,7 @@ const Navbar = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, mx: 'auto' }}>
               Timer-Doro
             </Typography>
-            <Button color="inherit" onClick={signout}>Logout</Button>
+            { user ? <Button color="inherit" onClick={signout}>Logout</Button> : <></>}
           </Toolbar>
         </AppBar>
       </Box>
