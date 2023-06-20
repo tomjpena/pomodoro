@@ -12,6 +12,14 @@ connectDB()
 const PORT = 5000
 const app = express()
 
+app.use(cors(
+  {
+    origin: ["https://URLHERE"],
+    methods: ["POST", "GET"],
+    credentials: true
+  }
+))
+
 // Body parser middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
