@@ -3,6 +3,7 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const connectDB = require('./config/db')
 const { errorHandler } = require('./middleware/errorMiddleware')
+const cors = require('cors')
 
 //Connect to DB
 connectDB()
@@ -12,13 +13,13 @@ connectDB()
 const PORT = 5000
 const app = express()
 
-app.use(cors(
-  {
-    origin: ["https://URLHERE"],
-    methods: ["POST", "GET"],
-    credentials: true
-  }
-))
+// app.use(cors(
+//   {
+//     origin: ["https://URLHERE"],
+//     methods: ["POST", "GET", "PUT"],
+//     credentials: true
+//   }
+// ))
 
 // Body parser middleware
 app.use(express.json())
