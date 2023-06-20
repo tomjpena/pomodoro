@@ -15,7 +15,7 @@ const app = express()
 
 app.use(cors(
   {
-    origin: ["https://pomodoro-api-ten.vercel.app"],
+    origin: ["https://pomodoro-six-wine.vercel.app"],
     methods: ["POST", "GET", "PUT"],
     credentials: true
   }
