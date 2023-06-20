@@ -10,7 +10,7 @@ connectDB()
 
 // Declare and initialize variables for server
 // @@ todo: setup PORT in env variables and use ||
-const PORT = 5000
+const PORT = process.env.PORT || 5000 
 const app = express()
 
 app.use(cors())
@@ -32,7 +32,7 @@ app.use('/api/data', require('./routes/dataRoutes'))
 app.use(errorHandler)
 
 // Starting Server
-app.listen(0, () => {
+app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}`);
 })
 
