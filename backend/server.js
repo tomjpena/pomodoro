@@ -13,13 +13,13 @@ connectDB()
 const PORT = 5000
 const app = express()
 
-// app.use(cors(
-//   {
-//     origin: ["https://URLHERE"],
-//     methods: ["POST", "GET", "PUT"],
-//     credentials: true
-//   }
-// ))
+app.use(cors(
+  {
+    origin: ["https://pomodoro-api-ten.vercel.app"],
+    methods: ["POST", "GET", "PUT"],
+    credentials: true
+  }
+))
 
 // Body parser middleware
 app.use(express.json())
@@ -38,7 +38,7 @@ app.use('/api/data', require('./routes/dataRoutes'))
 app.use(errorHandler)
 
 // Starting Server
-app.listen(PORT, () => {
+app.listen(0, () => {
   console.log(`Server running on port: ${PORT}`);
 })
 
