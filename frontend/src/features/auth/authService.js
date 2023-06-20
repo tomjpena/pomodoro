@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'https://pomodoro-api-ten.vercel.app/api/users'
+const API_URL = 'https://pomodoro-api-82f7.onrender.com/api/users'
 
 // Register User
 const register = async (userData) => {

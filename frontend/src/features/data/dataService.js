@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'https://pomodoro-api-ten.vercel.app/api/data'
+const API_URL = 'https://pomodoro-api-82f7.onrender.com/api/data'
 
 // Add a new project
 const addProject = async (projectData) => {
