@@ -1,5 +1,5 @@
 {
-  "name": "TimerDoro",
+  "name": "Timerdoro",
   "version": "1.0.0",
   "description": "Study efficiency app",
   "main": "server.js",
@@ -20,6 +20,7 @@
     "mongoose": "^7.1.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+
   }
 }
