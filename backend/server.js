@@ -13,7 +13,11 @@ connectDB()
 const PORT = process.env.PORT || 5000 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+  origin: 'https://pomodoro-m6xi.onrender.com',
+  credentials: true
+}));
+
 
 // Body parser middleware
 app.use(express.json())

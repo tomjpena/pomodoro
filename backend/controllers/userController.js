@@ -76,7 +76,7 @@ const loginUser = asyncHandler(async (req, res) => {
   if (user && passwordMatch) {
     const token = generateToken(user._id)
 
-    res.cookie('jwt', token, { httpOnly: true, maxAge: 86400000 })
+    res.cookies('jwt', token, { httpOnly: true, maxAge: 86400000 })
     return res.status(201).json({
       _id: user._id,
       username: user.username,

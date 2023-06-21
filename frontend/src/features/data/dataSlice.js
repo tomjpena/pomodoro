@@ -22,11 +22,16 @@ export const addProject = createAsyncThunk('data/add', async (data, thunkAPI) =>
   }
 })
 
-export const getData = createAsyncThunk('data/get', async (thunkAPI) => {
+export const getData = createAsyncThunk('data/get', async (data, thunkAPI) => {
   try {
     return await dataService.getData(data)
   } catch (error) {
-    const message = error.response.data.message
+    let message;
+    if (error.response && error.response.data) {
+      message = error.response.data.message;
+    } else {
+      message = error.message || 'An error occurred';
+    }
     return thunkAPI.rejectWithValue(message)
   }
 })

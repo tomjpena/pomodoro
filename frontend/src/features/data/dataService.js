@@ -12,7 +12,7 @@ const addProject = async (projectData) => {
 
 // Get project data
 const getData = async (userId) => {
-  const response = await axios.get(`${API_URL}/${userId}`)
+  const response = await axios.get(`${API_URL}/${userId}`, { withCredentials: true })
 
   return response.data
 }
