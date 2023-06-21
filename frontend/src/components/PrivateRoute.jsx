@@ -1,9 +1,9 @@
-import { Navigate, Outlet } from "react-router-dom"
-import { useAuthStatus } from '../hooks/useAuthStatus'
+import { Navigate } from "react-router-dom"
+import { useSelector } from "react-redux";
 
-const PrivateRoute = () => {
-  const { loggedIn } = useAuthStatus()
+const PrivateRoute = ({component: Component, ...rest}) => {
+  const { user } = useSelector((state) => state.auth);
 
-  return loggedIn ? <Outlet /> : <Navigate to='/login' replace />
+  return user ? <Route {...rest} element={<Component />} /> : <Navigate to='/login' replace />
 }
 export default PrivateRoute

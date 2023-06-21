@@ -24,7 +24,7 @@ export const addProject = createAsyncThunk('data/add', async (data, thunkAPI) =>
 
 export const getData = createAsyncThunk('data/get', async (thunkAPI) => {
   try {
-    return await dataService.getData()
+    return await dataService.getData(data)
   } catch (error) {
     const message = error.response.data.message
     return thunkAPI.rejectWithValue(message)

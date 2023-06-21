@@ -13,8 +13,10 @@ const Navbar = () => {
   const { user } = useSelector((state) => state.auth)
 
   useEffect(() => {
-    dispatch(getData())
-  }, [dispatch])
+    if (user && user._id) {
+      dispatch(getData(user._id))
+    }
+  }, [dispatch, user])
   
 
   const signout = () => {
