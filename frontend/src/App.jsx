@@ -22,11 +22,11 @@ function App() {
         <Navbar />
         <Router>
           <Routes>
-            <Route path='/' element={ <PrivateRoute component={Home} /> } />
             <Route path='/login' element={ <SignIn /> } />
-            <Route path='/newproject' element={ <PrivateRoute component={NewProject} /> } />
-            <Route path='/project/:projectId' element={ <PrivateRoute component={Project} /> } />
-            <Route path='/timer' element={ <PrivateRoute component={Timer} /> } />
+            <Route path='/' element={ <PrivateRoute component={Home} /> } />
+            <Route path='newproject/' element={ <PrivateRoute component={NewProject} /> } />
+            <Route path='project/:projectId/' element={ <PrivateRoute component={Project} /> } />
+            <Route path='timer/' element={ <PrivateRoute component={Timer} /> } />
           </Routes>
         </Router>
 
