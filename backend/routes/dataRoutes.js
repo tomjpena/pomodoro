@@ -7,7 +7,9 @@ const {auth} = require('../middleware/authMiddleware')
 
 const { getData, addProject, deleteProject, updateProject } = require('../controllers/dataController')
 
-router.route('/').post(auth, addProject).get(auth, getData).delete(auth, deleteProject)
+router.route('/').post(auth, addProject).delete(auth, deleteProject)
+
+router.route('/:userId').get(auth, getData)
 
 router.route('/project').put(auth, updateProject)
 

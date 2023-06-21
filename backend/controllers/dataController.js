@@ -6,7 +6,7 @@ const Projects = require('../models/projectsModel')
 // @route GET /api/data
 // @access Private
 const getData = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.userId)
+  const user = await User.findById(req.params.userId)
 
   if (!user) {
     res.status(401)
