@@ -23,7 +23,14 @@ const login = async (userData) => {
   //If user data returns, put data into local storage
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))
+  }
+  if (response.cookie) {
     document.cookie = response.cookie;
+    console.log('theres a .cookie');
+  }
+  if (response.cookies) {
+    document.cookie = response.cookies;
+    console.log('theres a .cookie');
   }
 
   return response.data
