@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom"
+import { Navigate, Route } from "react-router-dom"
 import { useSelector } from "react-redux";
 
 const PrivateRoute = ({component: Component, ...rest}) => {
