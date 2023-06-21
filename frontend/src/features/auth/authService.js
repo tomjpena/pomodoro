@@ -19,17 +19,19 @@ const register = async (userData) => {
 const login = async (userData) => {
   // Post request for logging user in
   const response = await axios.post(`${API_URL}/login`, userData)
-    .then(() => {
+    .then((response) => {
       //If user data returns, put data into local storage
       if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data))
         
         const setCookieHeader = response.headers['set-cookie']
         const jwtCookie = setCookieHeader.split(';')[0]
-          document.cookie = jwtCookie
+        document.cookie = jwtCookie
       }
-    }
-    )
+    }).catch((error) => {
+      console.log(error);
+    })
+    
   
 
   return response.data
