@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import NewProject from './pages/NewProject';
 import Project from './pages/Project';
 import Timer from './pages/Timer';
+import Register from './pages/Register';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Router>
           <Routes>
             <Route path='/login' element={ <SignIn /> } />
+            <Route path='/register' element={ <Register /> } />
             <Route path='/' element={ <PrivateRoute component={Home} /> } />
             <Route path='newproject/' element={ <PrivateRoute component={NewProject} /> } />
             <Route path='project/:projectId/' element={ <PrivateRoute component={Project} /> } />

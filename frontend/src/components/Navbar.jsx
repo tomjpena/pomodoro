@@ -25,7 +25,6 @@ const Navbar = () => {
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDrawer = () => {
-    console.log('drawer toggled');
     setDrawerOpen(!drawerOpen);
   }
 

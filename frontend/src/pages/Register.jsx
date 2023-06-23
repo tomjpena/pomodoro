@@ -1,12 +1,12 @@
 import {Avatar, Button, CssBaseline, TextField, Link, Box, Typography, Container} from '@mui/material'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { login, reset } from '../features/auth/authSlice';
+import { register, reset } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
-import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 
-const SignIn = () => {
+const Register = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -24,21 +24,20 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    const pass = data.get('password')
+    const pass2 = data.get('password2')
+
+    if (pass === pass2) {
+      const userData = {
+        'username': data.get('username'),
+        'password': data.get('password'),
+      }
+  
+      dispatch(register(userData))
+    } else {
+      console.log('Did not register');
+    }   
     
-    const userData = {
-      'username': data.get('username'),
-      'password': data.get('password'),
-    }
-
-    dispatch(login(userData))
-  }
-
-  const demoLogin = () => {
-    const userData = {
-      username: 'test',
-      password: '123456',
-    }
-    dispatch(login(userData))
   }
 
   return (
@@ -55,10 +54,10 @@ const SignIn = () => {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-            <LoginIcon />
+            <AppRegistrationIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Register
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -79,29 +78,27 @@ const SignIn = () => {
               type="password"
               id="password"
             />
+             <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password2"
+              label="Re-Enter Password"
+              type="password"
+              id="password2"
+            />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, color:'white' }}
             >
-              Sign In
+              Register
             </Button>
-            <Button
-              onClick={demoLogin}
-              fullWidth
-              variant="contained"
-              sx={{ mb: 2, color:'white' }}
-            >
-              Demo Sign In
-            </Button>
-            <Link href="/register" variant="body2" sx={[{ textDecoration:'none', color:'secondary' }, {'&:hover': { color: 'primary.dark' }}]}>
-              {"Don't have an account? Sign Up"}
-            </Link>
           </Box>
         </Box>
       </Container>
     </Container>
   );
 }
-export default SignIn
+export default Register

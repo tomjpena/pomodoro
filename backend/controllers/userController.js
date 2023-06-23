@@ -48,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
     })
   } catch (error) {
     res.status(400)
-    throw new Error('Error: User not created')
+    throw new Error(`Error: User not created ${error}`)
   }
  
 })
