@@ -26,12 +26,18 @@ export const register = createAsyncThunk('auth/register', async (user, thunkAPI)
 // Login action for extra reducers pulling from authSlice
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
-    return await authService.login(user)
+    return await authService.login(user);
   } catch (error) {
-    const message = error.response.data.message
-    return thunkAPI.rejectWithValue(message)
+    if (error.response) {
+      // Error response received from the server
+      const message = error.response.data.message;
+      return thunkAPI.rejectWithValue(message);
+    } else {
+      // Other error occurred
+      return thunkAPI.rejectWithValue('An error occurred');
+    }
   }
-})
+});
 
 export const logout = createAsyncThunk('auth/logout', async () => {
   await authService.logout()

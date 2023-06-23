@@ -17,21 +17,19 @@ const register = async (userData) => {
 
 // Login User
 const login = async (userData) => {
-  // Post request for logging user in
-  const response = await axios.post(`${API_URL}/login`, userData)
-    .then((response) => {
-      //If user data returns, put data into local storage
-      console.log("logged in");
-      if (response.data) {
-        localStorage.setItem('user', JSON.stringify(response.data))
-      }
-    }).catch((error) => {
-      console.log("log in error" + error);
-    })
-    
-  
-
-  return response.data
+  try {
+    // Post request for logging user in
+    const response = await axios.post(`${API_URL}/login`, userData);
+    // If user data returns, put data into local storage
+    console.log("logged in");
+    if (response.data) {
+      localStorage.setItem('user', JSON.stringify(response.data));
+    }
+    return response.data; // Return the response data
+  } catch (error) {
+    console.log("log in error" + error);
+    throw error; // Throw the error to be caught by the createAsyncThunk
+  }
 }
 
 // Logout User
