@@ -77,7 +77,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const token = generateToken(user._id)
 
     res.set('Access-Control-Allow-Credentials', 'true');
-    res.cookie('jwt', token, { httpOnly: false, maxAge: 86400000 })
+    res.cookie('jwt', token, { httpOnly: true, secure, maxAge: 86400000 })
     return res.status(201).json({
       _id: user._id,
       username: user.username,
