@@ -41,7 +41,8 @@ const registerUser = asyncHandler(async (req, res) => {
     const token = generateToken(user._id)
   
     // Put token into a cookie and send response
-    res.cookie('jwt', token, { httpOnly: true,SameSite: None, secure: true, maxAge: 86400000 })
+    res.set('Access-Control-Allow-Credentials', 'true');
+    res.cookie('jwt', token, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 86400000 })
     return res.status(201).json({
       _id: user._id,
       username: user.username,
