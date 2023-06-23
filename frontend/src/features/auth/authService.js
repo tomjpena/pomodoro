@@ -1,4 +1,5 @@
 import axios from 'axios'
+axios.defaults.withCredentials = true
 
 const API_URL = 'https://pomodoro-api-82f7.onrender.com/api/users'
 
