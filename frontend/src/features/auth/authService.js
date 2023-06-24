@@ -1,7 +1,7 @@
 import axios from 'axios'
 axios.defaults.withCredentials = true
 
-const API_URL = 'https://pomodoro-api-82f7.onrender.com/api/users'
+const API_URL = 'https://server.timerdoro.net/api/users'
 
 // Register User
 const register = async (userData) => {

@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000
 const app = express()
 
 app.use("/", cors({
-  origin: "https://pomodoro-m6xi.onrender.com",
+  origin: "https://timerdoro.net",
   credentials: true,
   exposedHeaders: ["Set-Cookie"]
 }));
